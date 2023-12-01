@@ -236,8 +236,8 @@ def cltr(jobid, dataset_name, correction_method,
             #out.requires_grad = True
             #out = out.clone().detach().requires_grad_(True)
             #y = y.clone().detach().requires_grad_(True)
-            loss2 = neuralNDCG_transposed(out,y)
-            #loss2 = neuralNDCG(out,y) # ---- New method
+            #loss2 = neuralNDCG_transposed(out,y)
+            loss2 = neuralNDCG(out,y) # ---- New method
             #loss = torch.tensor(neuralNDCG(out, y)).clone().detach().requires_grad_(True)
             #loss = torch.tensor(loss, requires_grad=True)
             #print("neuralNDCG loss:",loss)
@@ -245,7 +245,7 @@ def cltr(jobid, dataset_name, correction_method,
             #print("Lambda Loss:",lambdaLoss(out,y))
             #print("out:",out,"y:",y)
             #loss = (out, y)
-            alpha =0.0 #---New 
+            alpha =0.2 #---New 
             loss = alpha * loss1 + (1 - alpha) * loss2 #----New 
             #print("loss1:",loss1,"loss2:",loss2,"alpha:",alpha)
 
@@ -277,8 +277,8 @@ def cltr(jobid, dataset_name, correction_method,
                 
 
             train_ndcg = metrics.LTRMetrics(dataset.trlv,np.diff(dataset.trdlr),np.concatenate(qgdata.predicted, 0)).NDCG(10)
-            X_train= ndcg_score(dataset.trlv,np.concatenate(qgdata.predicted, 0))
-            print("X_train:",X_train)
+            #X_train= ndcg_score(dataset.trlv,np.concatenate(qgdata.predicted, 0))
+            #print("X_train:",X_train)
             #print(neuralNDCG(qgdata.predicted,dataset.trlv))
             #print("np.concatenate(qgdata.predicted, 0):",np.concatenate(qgdata.predicted, 0))
             #new_ndcg = neuralNDCG(dataset.trlv,np.concatenate(qgdata.predicted, 0))
